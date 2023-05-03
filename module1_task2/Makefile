@@ -3,7 +3,7 @@ HUGO_EXECUTABLE := hugo
 
 
 help: ## command help
-	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/\##//'
+	cat Makefile | grep '##' | tr -d '##' | head -n -1
 
 build:
 	$(HUGO_EXECUTABLE)
