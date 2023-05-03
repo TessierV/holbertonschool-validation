@@ -3,7 +3,7 @@
 HUGO_EXECUTABLE := hugo
 
 help: ## command help
-	cat Makefile | grep '##' | tr -d '##' | head -n -1
+	grep "##" Makefile | head -n -1 | tr -d '#'
 
 build: ## build files
 	$(HUGO_EXECUTABLE)
