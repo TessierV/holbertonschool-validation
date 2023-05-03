@@ -1,7 +1,6 @@
 ## executable variable
 HUGO_EXECUTABLE := hugo
 
-
 help: ## command help
 	cat Makefile | grep '##' | tr -d '##' | head -n -1
 
