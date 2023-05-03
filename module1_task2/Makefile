@@ -1,3 +1,4 @@
+## Makefile
 ## executable variable
 HUGO_EXECUTABLE := hugo
 
