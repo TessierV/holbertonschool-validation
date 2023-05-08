@@ -30,6 +30,7 @@ func setupRouter() *mux.Router {
 
   // when an HTTP GET request is received on the path /hello
   r.HandleFunc("/hello", HelloHandler).Methods("GET")
+
   return r
 }
 
