@@ -24,9 +24,4 @@ unit-tests: ## Test of unit test
 	go test -v -short -coverprofile=coverage-units.out
 
 integration-tests: ## Test integration-tests
-	go test -v -coverprofile=coverage-integration.out
-
-coverage: ## Generate test
-	make unit-tests
-	make integration-tests
-	go tool cover -html=coverage-units.out -html=coverage-integrations.out
+	go test -v -coverprofile=coverage-integrations.out
