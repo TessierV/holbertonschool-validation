@@ -16,9 +16,9 @@ clean:## Clean
 	-make stop
 	-rm -rf awesome-api
 
-lint: ## Test lint on the files
-	golangci-lint run
-
 test:## Test
 	curl http://localhost:9999
 	curl http://localhost:9999/health
+
+lint: ## Test lint on the files
+	golangci-lint run
