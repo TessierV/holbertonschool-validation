@@ -2,8 +2,8 @@ help:## Help
 	-fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 build:## Build the application
+	-make lint || exit -1
 	-go mod init github.com/TessieV/awesome-api
-	-make lint
 	-go build
 
 run:## Run
@@ -17,7 +17,7 @@ clean:## Clean
 	-rm -rf awesome-api
 
 lint: ## Test lint on the files
-	-golangci-lint run
+	golangci-lint run
 
 test:## Test
 	curl http://localhost:9999
