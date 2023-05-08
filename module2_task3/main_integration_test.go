@@ -31,6 +31,54 @@ func Test_server(t *testing.T) {
       responseCode: 200,
       body:         "Hello Holberton!",
     },
+	{
+	  name:			"Space in name, bad url",
+	  URI: 			"/hello?name=Grace&name=Hoper",
+	  responseCode:	400,
+	  body:			"400 Bad Request",
+	},
+	{
+	  name:			"if two name",
+	  URI:			"/hello?name=Betty&name=Holberton",
+	  responseCode:	200,
+	  body:			"Hello Betty!",
+	},
+	{
+	  name:			"Empty name",
+	  URI:			"/hello?name=",
+	  responseCode:	400,
+	},
+	{
+	  name:			"name is B212#",
+	  URI:			"/hello?name=B212%23",
+	  responseCode:	200,
+	  body:			"Hello B212#!",
+	},
+	{
+	  name: 		"There",
+	  URI:			"/hello?name=there",
+	  responseCode:	200,
+	  body:			"Hello there!",
+	},
+	{
+	  name:			"home path",
+	  URI:			"/",
+	  responseCode:	404,
+	  body:			"404 page not found\n",
+	},
+	{
+	  name: 		"invalid path",
+	  URI:			"/invalid",
+	  responseCode:	404,
+	  body:			"404 page not found\n",
+	},
+	{
+		name:         "No name parameter",
+		URI:          "/hello",
+		responseCode: 200,
+		body:         "Hello there!",
+	},
+
   }
 
   for _, tt := range tests {
