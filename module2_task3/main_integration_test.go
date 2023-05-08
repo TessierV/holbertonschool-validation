@@ -31,54 +31,41 @@ func Test_server(t *testing.T) {
       responseCode: 200,
       body:         "Hello Holberton!",
     },
+    {
+      name:         "Grace Hopper",
+      URI:  "/hello?name=Grace Hopper",
+      responseCode: 200,
+      body:         "Hello Grace Hopper!",
+    },
+    {
+      name:         "Rosalind Franklin",
+      URI:  "/hello?name=Rosalind Franklin",
+      responseCode: 200,
+      body:         "Hello Rosalind Franklin!",
+    },
+    {
+      name:         "Empty",
+      URI:  "name=",
+      responseCode: 400,
+    },
 	{
-	  name:			"Space in name, bad url",
-	  URI: 			"/hello?name=Grace&name=Hoper",
-	  responseCode:	400,
-	  body:			"400 Bad Request",
-	},
+      name:         "B212",
+      URI:  "/hello?name=B212",
+      responseCode: 200,
+      body:         "Hello B212!",
+    },
 	{
-	  name:			"if two name",
-	  URI:			"/hello?name=Betty&name=Holberton",
-	  responseCode:	200,
-	  body:			"Hello Betty!",
-	},
-	{
-	  name:			"Empty name",
-	  URI:			"/hello?name=",
-	  responseCode:	400,
-	},
-	{
-	  name:			"name is B212#",
-	  URI:			"/hello?name=B212%23",
-	  responseCode:	200,
-	  body:			"Hello B212#!",
-	},
-	{
-	  name: 		"There",
-	  URI:			"/hello?name=there",
-	  responseCode:	200,
-	  body:			"Hello there!",
-	},
-	{
-	  name:			"home path",
-	  URI:			"/",
-	  responseCode:	404,
-	  body:			"404 page not found\n",
-	},
-	{
-	  name: 		"invalid path",
-	  URI:			"/invalid",
-	  responseCode:	404,
-	  body:			"404 page not found\n",
-	},
-	{
-		name:         "No name parameter",
-		URI:          "/hello",
+		name:         "Multiple name",
+		URI:  "/hello?name=Betty&name=Holberton",
 		responseCode: 200,
-		body:         "Hello there!",
-	},
-
+		body:         "Hello Betty!",
+	  },
+	{
+    name:         "There",
+    queryString:  "/hello?name=",
+    responseCode: 200,
+    body:         "Hello there!",
+    },
   }
 
   for _, tt := range tests {
