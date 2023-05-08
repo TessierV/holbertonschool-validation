@@ -9,10 +9,11 @@ run:## Run
 	-./awesome-api >./awesome-api.log 2>&1 &
 
 stop:## Stop
-	pgrep awesome-api | xargs kill
+	kill "$(shell pgrep awesome-api)"
 
 clean:## Clean
-	kill "$(shell pgrep awesome-api)"
+	-make stop
+	-rm -rf awesome-api
 
 test:## Test
 	curl http://localhost:9999
