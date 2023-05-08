@@ -11,8 +11,7 @@ stop:## Stop
 	-kill "$(shell pgrep awesome-api)"
 
 clean:## Clean
-	-make stop
-	-rm -rf awesome-api coverage-integrations.out coverage-units.out
+	-make stop && rm -rf awesome-api coverage-integrations.out coverage-units.out
 
 test:## Test
 	make unit-tests
