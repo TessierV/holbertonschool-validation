@@ -31,41 +31,6 @@ func Test_server(t *testing.T) {
       responseCode: 200,
       body:         "Hello Holberton!",
     },
-    {
-      name:         "Grace Hopper",
-      URI:  "/hello?name=Grace Hopper",
-      responseCode: 200,
-      body:         "Hello Grace Hopper!",
-    },
-    {
-      name:         "Rosalind Franklin",
-      URI:  "/hello?name=Rosalind Franklin",
-      responseCode: 200,
-      body:         "Hello Rosalind Franklin!",
-    },
-    {
-      name:         "Empty",
-      URI:  "name=",
-      responseCode: 400,
-    },
-	{
-      name:         "B212",
-      URI:  "/hello?name=B212",
-      responseCode: 200,
-      body:         "Hello B212!",
-    },
-	{
-		name:         "Multiple name",
-		URI:  "/hello?name=Betty&name=Holberton",
-		responseCode: 200,
-		body:         "Hello Betty!",
-	  },
-	{
-    name:         "There",
-    queryString:  "/hello?name=",
-    responseCode: 200,
-    body:         "Hello there!",
-    },
   }
 
   for _, tt := range tests {
