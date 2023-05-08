@@ -1,11 +1,5 @@
 help:
-	@echo "Make targets:"
-	@echo "  help       - Print this help message."
-	@echo "  build      - Build the application."
-	@echo "  run        - Run the application in the background."
-	@echo "  stop       - Stop the application."
-	@echo "  clean      - Stop the application, delete the binary and log file."
-	@echo "  test       - Test the application."
+	fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 build:## Build the application
 	-go mod init github.com/TessieV/awesome-api
@@ -18,7 +12,7 @@ stop:## Stop
 	pgrep awesome-api | xargs kill
 
 clean:## Clean
-	kill "$(pgrep awesome-api)"
+	kill "$(shell pgrep awesome-api)"
 
 test:## Test
 	curl http://localhost:9999
