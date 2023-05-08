@@ -3,6 +3,9 @@ This is a simple API built
 
 ##Prerequisites
 Golang in vgo 1.13
+NPM v7+ with NodeJS v14.*
+Python3 with pip module
+golangci-lint
 
 ##Getting Started
 Clone this repository to your local machine.
