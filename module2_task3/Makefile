@@ -12,11 +12,11 @@ stop:## Stop
 
 clean:## Clean
 	-make stop
-	-rm -rf awesome-api
+	-rm -rf awesome-api coverage-integrations.out coverage-units.out
 
 test:## Test
-	curl http://localhost:9999
-	curl http://localhost:9999/health
+	make unit-tests
+	make integration-tests
 
 lint: ## Test lint on the files
 	golangci-lint run
@@ -25,5 +25,5 @@ unit-tests: ## Test of unit test
 	go test -v -short -coverprofile=coverage-units.out
 
 integration-tests: ## Test integration-tests
-	go test -v -short -coverprofile=coverage-integration.out
+	go test -v -coverprofile=coverage-integration.out
 
