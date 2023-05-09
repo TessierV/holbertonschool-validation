@@ -11,7 +11,6 @@ build: ## build files
 	-apt install ./hugo.deb
 	-rm hugo.deb
 	-make check && hugo -c dist/*
-	-$(HUGO_EXECUTABLE)
 
 clean: ## remove all file force ignore nonexistent files
 	rm -Rf dist/*
