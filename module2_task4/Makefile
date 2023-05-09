@@ -21,4 +21,4 @@ post: ## create new post
 	sed -i 's/title:.*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
 
 validate: ## validate index
-	./w3c_validator.py $(DESTDIR)/index.html || true
+	./w3c_validator.py ./dist/index.html || true
