@@ -1,24 +1,28 @@
 # Makefile
-build:## Build the website
+## executable variable
+DESTDIR=dist
+HUGO_EXECUTABLE := hugo
+
+help: ## command help
+	fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+
+check: ## check
+	-markdownlint -f ./content/posts/*.md && markdown-link-check ./content/posts/*.md
+
+build: ## build files
 	-curl -L https://github.com/gohugoio/hugo/releases/download/v0.84.0/hugo_extended_0.84.0_Linux-64bit.deb -o hugo.deb
 	-apt install ./hugo.deb
 	-rm hugo.deb
-	make check
-	hugo
+	-make check && hugo -c dist/*
 
-clean:## Clean the website
-	-rm -r dist/
+clean: ## remove all file force ignore nonexistent files
+	rm -Rf dist/*
 
-post:## Create a new post
-	-hugo new posts/$(POST_NAME).md && echo "---\ntitle: \"$(POST_TITLE)\"\ndate: 2022-11-20T09:03:20-08:00\ndraft: false\n---" > content/posts/$(POST_NAME).md
-
-check:## Check if post is valid
-	markdownlint -f ./content/posts/*.md
-	markdown-link-check ./content/posts/*.md
+post: ## create new post
+	$(HUGO_EXECUTABLE) new posts/$(POST_NAME).md
+	sed -i 's/title:.*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
 
 
-validate:## Validate the index
+validate: ## validate index
 	-./w3c_validator.py ./dist/index.html
 
-help:## Makefile help
-	-grep "##" Makefile | head -n -1 | tr -d '#'
