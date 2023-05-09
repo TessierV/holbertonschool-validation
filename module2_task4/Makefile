@@ -7,7 +7,6 @@ help: ## command help
 
 build: ## build files
 	-make check && $(HUGO_EXECUTABLE) -c dist/*
-	-$(HUGO_EXECUTABLE)
 
 clean: ## remove all file force ignore nonexistent files
 	rm -Rf dist/*
