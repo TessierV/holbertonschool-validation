@@ -6,6 +6,7 @@ help: ## command help
 	fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 build: ## build files
+	./setup.sh
 	-make check
 	-$(HUGO_EXECUTABLE)
 
@@ -17,8 +18,8 @@ post: ## create new post
 	sed -i 's/title:.*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
 
 check: ## check
-	-markdownlint -f ./content/posts/*.md
-	-markdown-link-check ./content/posts/*.md
+	markdownlint -f ./content/posts/*.md
+	markdown-link-check ./content/posts/*.md
 
 validate: ## validate index
 	-./w3c_validator.py ./dist/index.html
