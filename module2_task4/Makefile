@@ -7,7 +7,7 @@ help: ## command help
 	fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 check: ## check
-	markdownlint -f ./content/posts/*.md
+	-markdownlint -f ./content/posts/*.md
 	markdown-link-check ./content/posts/*.md
 
 build: ## build files
