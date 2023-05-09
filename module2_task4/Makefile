@@ -7,11 +7,11 @@ help: ## command help
 check: ## check
 	markdownlint -f ./content/posts/*.md && markdown-link-check ./content/posts/*.md
 
-build: check ## build files
+build: ## build files
 	curl -L https://github.com/gohugoio/hugo/releases/download/v0.84.0/hugo_extended_0.84.0_Linux-64bit.deb -o hugo.deb
 	apt install ./hugo.deb
 	rm hugo.deb
-	make check hugo -c $(DESTDIR)/*
+	make check && hugo -c $(DESTDIR)
 
 clean: ## remove all file force ignore nonexistent files
 	rm -Rf $(DESTDIR)/*
