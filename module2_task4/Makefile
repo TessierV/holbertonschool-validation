@@ -6,7 +6,7 @@ help: ## command help
 	fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 build: ## build files
-	-make check && $(HUGO_EXECUTABLE) -c dist/*
+	-make check && hugo -c dist/*
 
 clean: ## remove all file force ignore nonexistent files
 	rm -Rf dist/*
