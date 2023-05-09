@@ -1,12 +1,13 @@
 # Makefile
 ## executable variable
+DESTDIR=dist
 HUGO_EXECUTABLE := hugo
 
 help: ## command help
 	fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 build: ## build files
-	-make check && hugo -c dist/*
+	-make check && $(HUGO_EXECUTABLE) -c $(DESTDIR)
 
 clean: ## remove all file force ignore nonexistent files
 	rm -Rf dist/*
