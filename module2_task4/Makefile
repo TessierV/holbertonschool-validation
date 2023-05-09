@@ -1,5 +1,3 @@
-# Makefile
-## executable variable
 DESTDIR=dist
 HUGO_EXECUTABLE := hugo
 
@@ -9,20 +7,18 @@ help: ## command help
 check: ## check
 	markdownlint -f ./content/posts/*.md && markdown-link-check ./content/posts/*.md
 
-build: ## build files
-	-curl -L https://github.com/gohugoio/hugo/releases/download/v0.84.0/hugo_extended_0.84.0_Linux-64bit.deb -o hugo.deb
-	-apt install ./hugo.deb
-	-rm hugo.deb
-	$(MAKE) check  # add this line to make check a dependency of build
-	-hugo -c dist/*
+build: check ## build files
+	curl -L https://github.com/gohugoio/hugo/releases/download/v0.84.0/hugo_extended_0.84.0_Linux-64bit.deb -o hugo.deb
+	apt install ./hugo.deb
+	rm hugo.deb
+	hugo -c $(DESTDIR)/*
 
 clean: ## remove all file force ignore nonexistent files
-	rm -Rf dist/*
+	rm -Rf $(DESTDIR)/*
 
 post: ## create new post
 	$(HUGO_EXECUTABLE) new posts/$(POST_NAME).md
 	sed -i 's/title:.*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
 
-
 validate: ## validate index
-	-./w3c_validator.py ./dist/index.html
+	./w3c_validator.py $(DESTDIR)/index.html
