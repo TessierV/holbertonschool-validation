@@ -31,17 +31,70 @@ func Test_server(t *testing.T) {
       responseCode: 200,
       body:         "Hello Holberton!",
     },
-    {
-      name:         "Rosalind Franklin",
-      URI:          "/hello?name=Rosalind",
-      responseCode: 200,
-      body:         "Hello Rosalind Franklin!",
-    },
-    {
-      name:         "Empty",
-      URI:  "/hello?name=",
-      responseCode: 400,
-    },
+	{
+	  name:			"Space in name, bad url",
+	  URI: 			"/hello?name=Grace Hoper",
+	  responseCode:	400,
+	  body:			"400 Bad Request",
+	},
+	{
+	  name: 		"Encode space in URI with %20",
+	  URI:			"/hello?name=Rosalind%20Franklin",
+	  responseCode:	200,
+	  body:			"Hello Rosalind Franklin!",
+	},
+	{
+	  name:			"if two name",
+	  URI:			"/hello?name=Betty&name=Holberton",
+	  responseCode:	200,
+	  body:			"Hello Betty!",
+	},
+	{
+	  name:			"Empty name",
+	  URI:			"/hello?name=",
+	  responseCode:	400,
+	},
+	{
+	  name:			"without value name",
+	  URI:			"/hello?name",
+	  responseCode:	400,
+	  },
+	{
+	  name:			"name is B212#",
+	  URI:			"/hello?name=B212%23",
+	  responseCode:	200,
+	  body:			"Hello B212#!",
+	},
+	{
+	  name: 		"There",
+	  URI:			"/hello?name=there",
+	  responseCode:	200,
+	  body:			"Hello there!",
+	},
+	{
+	  name:			"health server",
+	  URI:			"/health",
+	  responseCode:	200,
+	  body:			"ALIVE",
+	},
+	{
+	  name:			"home path",
+	  URI:			"/",
+	  responseCode:	404,
+	  body:			"404 page not found\n",
+	},
+	{
+	  name: 		"invalid path",
+	  URI:			"/invalid",
+	  responseCode:	404,
+	  body:			"404 page not found\n",
+	},
+	{
+		name:         "No name parameter",
+		URI:          "/hello",
+		responseCode: 200,
+		body:         "Hello there!",
+	},
 
   }
 
