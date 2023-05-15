@@ -21,4 +21,4 @@ jobs:
           make run
           make stop
           make clean
-        working-directory: module3_task1
+        working-directory: module3_task1/
