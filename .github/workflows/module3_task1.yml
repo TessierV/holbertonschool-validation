@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Display hugo
-        run: cd module3_task1 && ./setup.sh
+        run: cd module3_task1/setup.sh
       - name: Makefile build cmd
         run: |
           make help
