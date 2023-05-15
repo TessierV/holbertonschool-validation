@@ -20,6 +20,9 @@
 - `make post POST_NAME=<post-name> POST_TITLE="<post-title>"`: Create a new blog post with the given name and title.
 
 ## Workflow
+
+## Build Workflow
+
 - `help`: show the help
 - `build`: Generate the website from the markdown and configuration files in the `dist/` directory.
 - `clean`: Clean up the content of the `dist/` directory.
