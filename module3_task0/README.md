@@ -19,6 +19,7 @@
 - `make clean`: Clean up the `dist/` directory.
 - `make post POST_NAME=<post-name> POST_TITLE="<post-title>"`: Create a new blog post with the given name and title.
 
+## Workflow
 ## Help
 - `make help`: Show the list of targets and their usage.
 
