@@ -1,3 +1,4 @@
+---
 name: module3_task1
 
 "on":
@@ -7,16 +8,17 @@ name: module3_task1
 
 jobs:
   build:
+    name: update
     runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Display hugo
+      - name: installation Hugo with script
         run: cd ./module3_task1 && ./setup.sh
 
-      - name: Makefile build cmd
+      - name: Validate Makefile execution make build command
         run: |
           make help
           make build
@@ -24,3 +26,4 @@ jobs:
           make stop
           make clean
         working-directory: module3_task1
+
