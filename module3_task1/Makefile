@@ -1,19 +1,50 @@
-DESTDIR=dist
-HUGO_EXECUTABLE := hugo
+GO=go
+TARGET=awesome-api
+RM=rm -rf
+MAKE=make
+COVERAGE=coverage
+HUGO=hugo
 
-help: ## command help
-	fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+build:	## Generate the source code of the application to a binary.
+	$(GO) mod tidy
+	$(MAKE) check && $(HUGO) && $(GO) build -o $(TARGET)
 
-build: ## build files
-	curl -L https://github.com/gohugoio/hugo/releases/download/v0.109.0/hugo_extended_0.109.0_Linux-64bit.tar.gz -o hugo.tar.gz
-	tar -xvf hugo.tar.gz hugo
-	rm hugo.tar.gz
-	mv hugo $(DESTDIR)/hugo
-	make check && $(DESTDIR)/hugo -c $(DESTDIR)/*
+run:	## Run the application in background by executing the binary.
+	./$(TARGET) >./$(TARGET).log 2>&1 &
 
-clean: ## remove all file force ignore nonexistent files
-	rm -Rf $(DESTDIR)/*
+post:	## Create a new blog post whose filename and title come from the environment variables POST_TITLE and POST_NAME
+	$(HUGO) new posts/$(POST_NAME).md
+	sed -i '2s/.*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
 
-post: ## create new post with POST_NAME ans POST_TITLE given
-	hugo new posts/$(POST_NAME).md
-	sed -i 's|title:.*|title: "$(POST_TITLE)"|' content/posts/$(POST_NAME).md
+stop:	## Stop the application.
+	@pkill $(TARGET)
+
+clean:	## Stop the application. Delete the binary and the log file.
+	@if pgrep -x $(TARGET) > /dev/null; then \
+		pkill $(TARGET); \
+	fi
+	@$(RM) $(TARGET) $(TARGET).log $(COVERAGE)-units.out $(COVERAGE)-integrations.out dist/ *~
+
+test:	## Test the application.
+	$(MAKE) unit-tests
+	$(MAKE) integration-tests
+	$(MAKE) validate
+
+unit-tests: ## Run unit tests
+	go test -v -short -coverprofile=$(COVERAGE)-units.out
+
+integration-tests: ## Run integration tests
+	go test -v -coverprofile=$(COVERAGE)-integrations.out
+
+lint:	## Lint go lang code
+	@golangci-lint run
+
+check:	## Lint markdonw source, check dead links
+	markdownlint ./content/posts/*.md
+	find content -name \*.md -print0 | xargs -0 -n1 markdown-link-check
+
+validate:	## Validate the file dist/index.html using the command line Holberton’s W3C Validator.
+	python3 ./w3c_validator.py ./dist/index.html || true
+
+help:	## Show this help usage.
+	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
